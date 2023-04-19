@@ -1,0 +1,17 @@
+//Base
+@import './base/colors.scss';
+@import './base/fonts.scss';
+@import './base/mixins.scss';
+@import './base/configuration.scss';
+
+//Pages
+@import './apps/ngshop/pages/home-page.scss';
+@import './apps/ngshop/pages/product-list.scss';
+
+//Shared
+@import './apps/ngshop/shared/footer.scss';
+@import './apps/ngshop/shared/header.scss';
+
+//Libs
+@import './libs/ui/banner.scss';
+@import './libs/ui/slider.scss';
