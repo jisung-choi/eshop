@@ -1,5 +1,7 @@
 import { NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 import { RouterModule, Routes } from "@angular/router";
 import { AppComponent } from "./app.component";
 import { NxWelcomeComponent } from "./nx-welcome.component";
@@ -8,6 +10,7 @@ import { ProductListComponent } from './pages/product-list/product-list.componen
 import { HeaderComponent } from './shared/header/header.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { UiModule } from "@eshop/ui";
+import { AccordionModule } from 'primeng/accordion';
 
 const routes: Routes = [
   {path: '', component: HomePageComponent},
@@ -18,8 +21,9 @@ const routes: Routes = [
   declarations: [AppComponent, NxWelcomeComponent, HomePageComponent, ProductListComponent, HeaderComponent, FooterComponent],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     RouterModule.forRoot(routes),
-    UiModule
+    UiModule, AccordionModule
   ],
   providers: [],
   bootstrap: [AppComponent],

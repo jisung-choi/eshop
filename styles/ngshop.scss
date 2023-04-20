@@ -2,11 +2,15 @@
 @import './base/colors.scss';
 @import './base/fonts.scss';
 @import './base/mixins.scss';
-@import './base/configuration.scss';
+
 
 //Library
 @import '~primeng/resources/primeng.css';
 @import '~primeng/resources/themes/saga-blue/theme.css';
+@import '~primeflex/primeflex.css';
+
+@import './base/configuration.scss';
+
 //Pages
 @import './apps/ngshop/pages/home-page.scss';
 @import './apps/ngshop/pages/product-list.scss';
