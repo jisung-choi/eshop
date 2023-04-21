@@ -6,6 +6,7 @@
   "private": true,
   "dependencies": {
     "@angular/animations": "~15.2.0",
+    "@angular/cdk": "^15.2.8",
     "@angular/common": "~15.2.0",
     "@angular/compiler": "~15.2.0",
     "@angular/core": "~15.2.0",
@@ -14,6 +15,7 @@
     "@angular/platform-browser-dynamic": "~15.2.0",
     "@angular/router": "~15.2.0",
     "@nrwl/angular": "15.9.2",
+    "normalize.css": "^8.0.1",
     "primeflex": "^3.3.0",
     "primeicons": "^6.0.1",
     "primeng": "^15.2.0",
