@@ -34,6 +34,7 @@
                             <td>{{ category.icon }}</td>
                             <td>
                                 <p-button
+                                (click)="updateCategory(category.id)"
                                 styleClass="p-button-success mr-2"
                                 icon="pi pi-pencil"
                                ></p-button>
