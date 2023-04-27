@@ -29,6 +29,7 @@ export class CategoriesFormComponent implements OnInit {
       this.form = this.formBuilder.group({
         name:['', Validators.required],
         icon:['', Validators.required],
+        color: ['#fff']
       })
       this._checkEditMode();
   }
@@ -38,7 +39,8 @@ export class CategoriesFormComponent implements OnInit {
     const category: Category = {
       id: this.currentCategoryId,
       name: this.categoryForm.name.value,
-      icon: this.categoryForm.icon.value
+      icon: this.categoryForm.icon.value,
+      color: this.categoryForm.color.value
     }
     if(this.editMode){
       this._updateCategory(category)
@@ -49,14 +51,14 @@ export class CategoriesFormComponent implements OnInit {
 
   private _addCategory(category: Category){
     this.categoriesService.createCategory(category).subscribe({
-      next: () => this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Category is created' }),
+      next: () => this.messageService.add({ severity: 'success', summary: 'Success', detail: `Category ${category.name} is created` }),
       error: () => this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Category could not be created' }),
       complete: () => setTimeout(() => this.goBack(), 2000)
   })}
 
   private _updateCategory(category: Category){
     this.categoriesService.updateCategory(category).subscribe({
-      next: () => this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Category is updated' }),
+      next: () => this.messageService.add({ severity: 'success', summary: 'Success', detail: `Category ${category.name} is updated` }),
       error: () => this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Category could not be updated' }),
       complete: () => setTimeout(() => this.goBack(), 2000)
   })}
@@ -69,6 +71,7 @@ export class CategoriesFormComponent implements OnInit {
         this.categoriesService.getCategory(params.id).subscribe(category => {
           this.categoryForm.name.setValue(category.name);
           this.categoryForm.icon.setValue(category.icon);
+          this.categoryForm.color.setValue(category.color);
         });
       }
     })

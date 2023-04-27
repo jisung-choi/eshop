@@ -8,15 +8,24 @@
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "options": {
         "outputPath": "dist/apps/ngshop",
         "index": "apps/ngshop/src/index.html",
         "main": "apps/ngshop/src/main.ts",
-        "polyfills": ["zone.js"],
+        "polyfills": [
+          "zone.js"
+        ],
         "tsConfig": "apps/ngshop/tsconfig.app.json",
-        "assets": ["apps/ngshop/src/favicon.ico", "apps/ngshop/src/assets"],
-        "styles": ["apps/ngshop/src/styles.scss"],
+        "assets": [
+          "apps/ngshop/src/favicon.ico",
+          "apps/ngshop/src/assets"
+        ],
+        "styles": [
+          "apps/ngshop/src/styles.scss"
+        ],
         "scripts": []
       },
       "configurations": {
@@ -41,7 +50,13 @@
           "vendorChunk": true,
           "extractLicenses": false,
           "sourceMap": true,
-          "namedChunks": true
+          "namedChunks": true,
+          "fileReplacements": [
+            {
+              "replace": "environments/environment.ts",
+              "with": "environments/environment.development.ts"
+            }
+          ]
         }
       },
       "defaultConfiguration": "production"
@@ -66,14 +81,21 @@
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",
-      "outputs": ["{options.outputFile}"],
+      "outputs": [
+        "{options.outputFile}"
+      ],
       "options": {
-        "lintFilePatterns": ["apps/ngshop/**/*.ts", "apps/ngshop/**/*.html"]
+        "lintFilePatterns": [
+          "apps/ngshop/**/*.ts",
+          "apps/ngshop/**/*.html"
+        ]
       }
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "outputs": [
+        "{workspaceRoot}/coverage/{projectRoot}"
+      ],
       "options": {
         "jestConfig": "apps/ngshop/jest.config.ts",
         "passWithNoTests": true
