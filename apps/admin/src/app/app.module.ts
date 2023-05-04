@@ -13,6 +13,8 @@ import { SidebarComponent } from './shared/sidebar/sidebar.component';
 import { CategoriesListComponent } from './pages/categories/categories-list/categories-list.component';
 import { ProductsListComponent } from './pages/products/products-list/products-list.component';
 import { ProductsFormComponent } from './pages/products/products-form/products-form.component';
+import { UsersFormComponent } from './pages/users/users-form/users-form.component';
+import { UsersListComponent } from './pages/users/users-list/users-list.component';
 
 import { CardModule } from 'primeng/card';
 import { ToolbarModule } from 'primeng/toolbar';
@@ -30,6 +32,8 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
 import { DropdownModule } from 'primeng/dropdown';
 import { InputSwitchModule } from 'primeng/inputswitch';
 import { EditorModule } from 'primeng/editor';
+import { TagModule } from 'primeng/tag';
+import { InputMaskModule } from 'primeng/inputmask';
 
 const UX_MODULE = [
   CardModule,
@@ -45,6 +49,8 @@ const UX_MODULE = [
   DropdownModule,
   InputSwitchModule,
   EditorModule,
+  TagModule,
+  InputMaskModule
 ]
 
 const routes: Routes = [
@@ -80,12 +86,24 @@ const routes: Routes = [
         path:'products/form/:id',
         component: ProductsFormComponent
       },
+      {
+        path:'users',
+        component: UsersListComponent
+      },
+      {
+        path:'users/form',
+        component: UsersFormComponent
+      },
+      {
+        path:'users/form/:id',
+        component: UsersFormComponent
+      },
     ]  
   },
 ]
 
 @NgModule({
-  declarations: [AppComponent, NxWelcomeComponent, DashboardComponent, ShellComponent, SidebarComponent, CategoriesListComponent, CategoriesFormComponent, ProductsListComponent, ProductsFormComponent],
+  declarations: [AppComponent, NxWelcomeComponent, DashboardComponent, ShellComponent, SidebarComponent, CategoriesListComponent, CategoriesFormComponent, ProductsListComponent, ProductsFormComponent, UsersFormComponent, UsersListComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,

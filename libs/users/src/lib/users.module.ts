@@ -5,5 +5,6 @@ import { usersRoutes } from './lib.routes';
 
 @NgModule({
   imports: [CommonModule, RouterModule.forChild(usersRoutes), RouterModule],
+
 })
 export class UsersModule {}
