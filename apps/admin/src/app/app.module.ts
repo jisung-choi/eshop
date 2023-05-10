@@ -1,6 +1,6 @@
-import { NgModule } from '@angular/core';
+import { inject, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -17,7 +17,7 @@ import { UsersFormComponent } from './pages/users/users-form/users-form.componen
 import { UsersListComponent } from './pages/users/users-list/users-list.component';
 import { OrdersListComponent } from './pages/orders/orders-list/orders-list.component';
 import { OrdersDetailComponent } from './pages/orders/orders-detail/orders-detail.component';
-import { UsersModule } from '@eshop/users';
+import { AuthGuardService, JwtInterceptor, UsersModule } from '@eshop/users';
 
 import { CardModule } from 'primeng/card';
 import { ToolbarModule } from 'primeng/toolbar';
@@ -62,6 +62,7 @@ const routes: Routes = [
   { 
     path: '', 
     component: ShellComponent,
+    canActivate: [() => inject(AuthGuardService).canActivate()],
     children: [
       {
         path:'dashboard',
@@ -127,7 +128,9 @@ const routes: Routes = [
     UsersModule,
     ...UX_MODULE
   ],
-  providers: [CategoriesService, MessageService, ConfirmationService],
+  providers: [CategoriesService, MessageService, ConfirmationService,
+  { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true}
+],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
