@@ -1,0 +1,30 @@
+.d-item {
+    display: flex;
+    text-align: center;
+    color: var(--surface-0);
+    justify-content: space-between;
+
+    .pi{
+        font-size: 4em;
+        margin-bottom: 15px;
+    }
+
+    .name{
+        font-size: 1.4em;
+    }
+
+    .number{
+        margin-top: 50px;
+        font-size: 3em;
+    }
+    
+    .totalsales{
+        margin-top: 80px;
+        font-size: 1.4em;
+    }
+}
+
+.d-orders {
+    background: rgb(13,60,97);
+    background: linear-gradient(153deg, rgba(13,60,97,0.45) 0%, rgba(13,60,97,0.75) 25%, rgba(13,60,97,1) 100%);
+}
