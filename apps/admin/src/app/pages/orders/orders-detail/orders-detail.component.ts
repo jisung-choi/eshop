@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Location } from '@angular/common';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Order, OrdersService } from '@eshop/orders';
 import { MessageService } from 'primeng/api';
+import { Subject, takeUntil } from 'rxjs';
 import { ORDER_STATUS } from '../order.constants';
 
 @Component({
@@ -10,19 +12,26 @@ import { ORDER_STATUS } from '../order.constants';
   styles: [
   ]
 })
-export class OrdersDetailComponent implements OnInit {
+export class OrdersDetailComponent implements OnInit, OnDestroy {
   order: Order;
   orderStatuses = [];
   selectedStatus: any;
+  endSubs$: Subject<any> = new Subject();
+
   constructor(
     private ordersService: OrdersService,
     private route: ActivatedRoute,
+    private location: Location,
     private messageService: MessageService,
   ){}
 
   ngOnInit(): void {
     this._mapOrderStatus();
     this._getOrder();
+  }
+
+  ngOnDestroy(): void {
+    this.endSubs$.complete();
   }
   
   private _mapOrderStatus(){
@@ -37,7 +46,7 @@ export class OrdersDetailComponent implements OnInit {
   private _getOrder(){
     this.route.params.subscribe(params => {
       if(params.id){
-        this.ordersService.getOrder(params.id).subscribe(order => {
+        this.ordersService.getOrder(params.id).pipe(takeUntil(this.endSubs$)).subscribe(order => {
           this.order = order;
         })
       }
@@ -45,8 +54,9 @@ export class OrdersDetailComponent implements OnInit {
   }
 
   onStatusChange(event) {
-    this.ordersService.updateOrder({status: event.value}, this.order.id).subscribe({
+    this.ordersService.updateOrder({status: event.value}, this.order.id).pipe(takeUntil(this.endSubs$)).subscribe({
       next: () => this.messageService.add({ severity: 'success', summary: 'Success', detail: `Order is updated` }),
       error: () => this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Order could not be updated' }),
+      complete: () => setTimeout(() => this.location.back(), 2000)
   })}
 }

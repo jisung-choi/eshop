@@ -1,9 +1,10 @@
 import { Location } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { CategoriesService, Category } from '@eshop/products';
 import { MessageService } from 'primeng/api';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'admin-categories-form',
@@ -11,11 +12,12 @@ import { MessageService } from 'primeng/api';
   styles: [
   ]
 })
-export class CategoriesFormComponent implements OnInit {
+export class CategoriesFormComponent implements OnInit, OnDestroy {
   form: FormGroup
   isSubmitted = false;
   editMode = false;
   currentCategoryId = "";
+  endSubs$: Subject<any> = new Subject();
 
   constructor(
     private messageService: MessageService, 
@@ -32,6 +34,10 @@ export class CategoriesFormComponent implements OnInit {
         color: ['#fff']
       })
       this._checkEditMode();
+  }
+
+  ngOnDestroy(): void {
+    this.endSubs$.complete();
   }
   onSubmit(){
     this.isSubmitted = true;
@@ -50,14 +56,14 @@ export class CategoriesFormComponent implements OnInit {
   }
 
   private _addCategory(category: Category){
-    this.categoriesService.createCategory(category).subscribe({
+    this.categoriesService.createCategory(category).pipe(takeUntil(this.endSubs$)).subscribe({
       next: () => this.messageService.add({ severity: 'success', summary: 'Success', detail: `Category ${category.name} is created` }),
       error: () => this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Category could not be created' }),
       complete: () => setTimeout(() => this.goBack(), 2000)
   })}
 
   private _updateCategory(category: Category){
-    this.categoriesService.updateCategory(category).subscribe({
+    this.categoriesService.updateCategory(category).pipe(takeUntil(this.endSubs$)).subscribe({
       next: () => this.messageService.add({ severity: 'success', summary: 'Success', detail: `Category ${category.name} is updated` }),
       error: () => this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Category could not be updated' }),
       complete: () => setTimeout(() => this.goBack(), 2000)
@@ -68,7 +74,7 @@ export class CategoriesFormComponent implements OnInit {
       if(params.id) {
         this.editMode = true;
         this.currentCategoryId = params.id;
-        this.categoriesService.getCategory(params.id).subscribe(category => {
+        this.categoriesService.getCategory(params.id).pipe(takeUntil(this.endSubs$)).subscribe(category => {
           this.categoryForm.name.setValue(category.name);
           this.categoryForm.icon.setValue(category.icon);
           this.categoryForm.color.setValue(category.color);

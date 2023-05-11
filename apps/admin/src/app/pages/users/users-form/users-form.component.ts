@@ -1,21 +1,24 @@
 import { Location } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { UsersService, User } from '@eshop/users';
 import { MessageService } from 'primeng/api';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'admin-users-form',
   templateUrl: './users-form.component.html',
   styles: []
 })
-export class UsersFormComponent implements OnInit {
+export class UsersFormComponent implements OnInit, OnDestroy {
   form: FormGroup;
   isSubmitted = false;
   editMode = false;
   currentUserId: string;
   countries = [];
+
+  endSubs$: Subject<any> = new Subject();
 
   constructor(
     private messageService: MessageService,
@@ -29,6 +32,10 @@ export class UsersFormComponent implements OnInit {
     this._initUserForm();
     this._getCountries();
     this._checkEditMode();
+  }
+
+  ngOnDestroy(): void {
+    this.endSubs$.complete();
   }
 
   private _initUserForm() {
@@ -51,21 +58,21 @@ export class UsersFormComponent implements OnInit {
   }
 
   private _addUser(user: User){
-    this.usersService.createUser(user).subscribe({
+    this.usersService.createUser(user).pipe(takeUntil(this.endSubs$)).subscribe({
       next: () => this.messageService.add({ severity: 'success', summary: 'Success', detail: `User ${user.name} is created` }),
       error: () => this.messageService.add({ severity: 'error', summary: 'Error', detail: 'User could not be created' }),
       complete: () => setTimeout(() => this.goBack(), 2000)
   })}
 
   private _updateUser(user: User){
-    this.usersService.updateUser(user).subscribe({
+    this.usersService.updateUser(user).pipe(takeUntil(this.endSubs$)).subscribe({
       next: () => this.messageService.add({ severity: 'success', summary: 'Success', detail: `User ${user.name} is updated` }),
       error: () => this.messageService.add({ severity: 'error', summary: 'Error', detail: 'User could not be updated' }),
       complete: () => setTimeout(() => this.goBack(), 2000)
   })}
 
   private _checkEditMode() {
-    this.route.params.subscribe((params) => {
+    this.route.params.pipe(takeUntil(this.endSubs$)).subscribe((params) => {
       if (params.id) {
         this.editMode = true;
         this.currentUserId = params.id;
