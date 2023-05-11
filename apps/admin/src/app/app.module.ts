@@ -1,10 +1,9 @@
-import { inject, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { NxWelcomeComponent } from './nx-welcome.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
@@ -17,7 +16,7 @@ import { UsersFormComponent } from './pages/users/users-form/users-form.componen
 import { UsersListComponent } from './pages/users/users-list/users-list.component';
 import { OrdersListComponent } from './pages/orders/orders-list/orders-list.component';
 import { OrdersDetailComponent } from './pages/orders/orders-detail/orders-detail.component';
-import { AuthGuardService, JwtInterceptor, UsersModule } from '@eshop/users';
+import { JwtInterceptor, UsersModule } from '@eshop/users';
 
 import { CardModule } from 'primeng/card';
 import { ToolbarModule } from 'primeng/toolbar';
@@ -38,6 +37,7 @@ import { EditorModule } from 'primeng/editor';
 import { TagModule } from 'primeng/tag';
 import { InputMaskModule } from 'primeng/inputmask';
 import { FieldsetModule } from 'primeng/fieldset';
+import { AppRoutingModule } from './app-routing.module';
 
 const UX_MODULE = [
   CardModule,
@@ -58,63 +58,7 @@ const UX_MODULE = [
   FieldsetModule,
 ]
 
-const routes: Routes = [
-  { 
-    path: '', 
-    component: ShellComponent,
-    canActivate: [() => inject(AuthGuardService).canActivate()],
-    children: [
-      {
-        path:'dashboard',
-        component: DashboardComponent
-      },
-      {
-        path:'categories',
-        component: CategoriesListComponent
-      },
-      {
-        path:'categories/form',
-        component: CategoriesFormComponent
-      },
-      {
-        path:'categories/form/:id',
-        component: CategoriesFormComponent
-      },
-      {
-        path:'products',
-        component: ProductsListComponent
-      },
-      {
-        path:'products/form',
-        component: ProductsFormComponent
-      },
-      {
-        path:'products/form/:id',
-        component: ProductsFormComponent
-      },
-      {
-        path:'users',
-        component: UsersListComponent
-      },
-      {
-        path:'users/form',
-        component: UsersFormComponent
-      },
-      {
-        path:'users/form/:id',
-        component: UsersFormComponent
-      },
-      {
-        path:'orders',
-        component: OrdersListComponent
-      },
-      {
-        path:'orders/:id',
-        component: OrdersDetailComponent
-      },
-    ]  
-  },
-]
+
 
 @NgModule({
   declarations: [AppComponent, NxWelcomeComponent, DashboardComponent, ShellComponent, SidebarComponent, CategoriesListComponent, CategoriesFormComponent, ProductsListComponent, ProductsFormComponent, UsersFormComponent, UsersListComponent, OrdersListComponent, OrdersDetailComponent],
@@ -124,8 +68,8 @@ const routes: Routes = [
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    RouterModule.forRoot(routes),
     UsersModule,
+    AppRoutingModule,
     ...UX_MODULE
   ],
   providers: [CategoriesService, MessageService, ConfirmationService,
