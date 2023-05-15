@@ -12,6 +12,7 @@ import { FooterComponent } from './shared/footer/footer.component';
 import { UiModule } from "@eshop/ui";
 import { NavComponent } from './shared/nav/nav.component';
 import { ProductsModule } from "@eshop/products";
+import { HttpClientModule } from "@angular/common/http";
 
 const routes: Routes = [
   {path: '', component: HomePageComponent},
@@ -24,6 +25,7 @@ const routes: Routes = [
     BrowserModule,
     BrowserAnimationsModule,
     RouterModule.forRoot(routes),
+    HttpClientModule,
     UiModule,
     ProductsModule,
     UiModule,

@@ -6,10 +6,10 @@ import { ButtonModule } from 'primeng/button';
 @NgModule({
   imports: [CommonModule, ButtonModule],
   declarations: [
-    BannerComponent
+    BannerComponent,
   ],
   exports: [
-    BannerComponent
+    BannerComponent,
   ],
 })
 export class UiModule {}
