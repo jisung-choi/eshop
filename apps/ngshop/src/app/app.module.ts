@@ -10,7 +10,6 @@ import { ProductListComponent } from './pages/product-list/product-list.componen
 import { HeaderComponent } from './shared/header/header.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { UiModule } from "@eshop/ui";
-import { AccordionModule } from 'primeng/accordion';
 import { NavComponent } from './shared/nav/nav.component';
 import { ProductsModule } from "@eshop/products";
 
@@ -26,7 +25,8 @@ const routes: Routes = [
     BrowserAnimationsModule,
     RouterModule.forRoot(routes),
     UiModule,
-    ProductsModule
+    ProductsModule,
+    UiModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
