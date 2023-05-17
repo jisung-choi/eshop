@@ -4,7 +4,6 @@ import { Category } from '../../models/category';
 import { CategoriesService } from '../../services/categories.service';
 
 @Component({
-  // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'products-categories-banner',
   templateUrl: './categories-banner.component.html',
   styles: [
