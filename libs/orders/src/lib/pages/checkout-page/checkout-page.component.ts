@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UsersService } from '@eshop/users';
@@ -8,12 +8,13 @@ import { OrderItem } from '../../models/order-item';
 import { CartService } from '../../services/cart.service';
 import { OrdersService } from '../../services/orders.service';
 import { ORDER_STATUS } from '../../order.constants';
+import { Subject, take, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'orders-checkout-page',
   templateUrl: './checkout-page.component.html'
 })
-export class CheckoutPageComponent implements OnInit {
+export class CheckoutPageComponent implements OnInit, OnDestroy {
   constructor(
     private router: Router,
     private usersService: UsersService,
@@ -24,25 +25,47 @@ export class CheckoutPageComponent implements OnInit {
   checkoutFormGroup: FormGroup;
   isSubmitted = false;
   orderItems: OrderItem[] = [];
-  userId = "609d65943373711346c5e950";
+  userId: string
   countries = [];
+  endSubs$ : Subject<any> = new Subject();
 
   ngOnInit(): void {
     this._initCheckoutForm();
+    this._autoFillUserData();
     this._getCartItems();
     this._getCountries();
   }
 
+  ngOnDestroy(): void {
+      this.endSubs$.complete();
+  }
+
+  private _autoFillUserData() {
+    this.usersService.observeCurrentUser().pipe(takeUntil(this.endSubs$)).subscribe(user => {
+      if(user){
+        this.userId = user.id;
+        this.checkoutForm.name.setValue(user.name);
+        this.checkoutForm.email.setValue(user.email);
+        this.checkoutForm.phone.setValue(user.phone);
+        this.checkoutForm.city.setValue(user.city);
+        this.checkoutForm.street.setValue(user.street);
+        this.checkoutForm.country.setValue(user.country);
+        this.checkoutForm.zip.setValue(user.zip);
+        this.checkoutForm.apartment.setValue(user.apartment);
+      }
+    });
+  }
+
   private _initCheckoutForm() {
     this.checkoutFormGroup = this.formBuilder.group({
-      name: ['Dev', Validators.required],
-      email: ['dev@dev.com', [Validators.email, Validators.required]],
-      phone: ['1231231233', Validators.required],
-      city: ['dev', Validators.required],
-      country: ['AT', Validators.required],
-      zip: ['123123', Validators.required],
-      apartment: ['dev', Validators.required],
-      street: ['dev', Validators.required]
+      name: ['', Validators.required],
+      email: ['', [Validators.email, Validators.required]],
+      phone: ['', Validators.required],
+      city: ['', Validators.required],
+      country: ['', Validators.required],
+      zip: ['', Validators.required],
+      apartment: ['', Validators.required],
+      street: ['', Validators.required]
     });
   }
 

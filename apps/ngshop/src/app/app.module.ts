@@ -12,10 +12,13 @@ import { MessagesComponent } from './shared/messages/messages.component';
 import { UiModule } from "@eshop/ui";
 import { NavComponent } from './shared/nav/nav.component';
 import { ProductsModule } from "@eshop/products";
-import { HttpClientModule } from "@angular/common/http";
+import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { OrdersModule } from "@eshop/orders";
 import { ToastModule } from "primeng/toast";
 import { MessageService } from "primeng/api";
+import { StoreModule } from "@ngrx/store";
+import { EffectsModule } from "@ngrx/effects";
+import { JwtInterceptor } from "@eshop/users";
 
 const routes: Routes = [
   {path: '', component: HomePageComponent},
@@ -28,13 +31,15 @@ const routes: Routes = [
     BrowserAnimationsModule,
     RouterModule.forRoot(routes),
     HttpClientModule,
+    StoreModule.forRoot({}),
+    EffectsModule.forRoot([]),
     UiModule,
     ProductsModule,
     UiModule,
     OrdersModule,
     ToastModule
   ],
-  providers: [MessageService],
+  providers: [MessageService,  { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true}],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

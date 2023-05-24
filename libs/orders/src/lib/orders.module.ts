@@ -1,7 +1,6 @@
-import { NgModule } from '@angular/core';
+import { inject, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
-import { ordersRoutes } from './lib.routes';
 import { CartService } from './services/cart.service';
 import { CartIconComponent } from './components/cart-icon/cart-icon.component';
 import { BadgeModule } from 'primeng/badge';
@@ -16,6 +15,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { InputMaskModule } from 'primeng/inputmask';
 import { InputTextModule } from 'primeng/inputtext';
 import { ThankYouComponent } from './pages/thank-you/thank-you.component';
+import { AuthGuardService, UsersModule } from '@eshop/users';
 
 const routes: Routes = [
   {
@@ -24,6 +24,7 @@ const routes: Routes = [
   },
   {
     path: 'checkout',
+    canActivate: [() => inject(AuthGuardService).canActivate()],
     component: CheckoutPageComponent
   },
   {
@@ -42,7 +43,8 @@ const routes: Routes = [
     InputNumberModule, 
     FormsModule, 
     DropdownModule, 
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    UsersModule
   ],
   declarations: [
     CartIconComponent,
