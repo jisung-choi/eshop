@@ -5,7 +5,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
-import { NxWelcomeComponent } from './nx-welcome.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { ShellComponent } from './shared/shell/shell.component';
 import { SidebarComponent } from './shared/sidebar/sidebar.component';
@@ -40,6 +39,7 @@ import { FieldsetModule } from 'primeng/fieldset';
 import { AppRoutingModule } from './app-routing.module';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
+import { NgxStripeModule } from 'ngx-stripe';
 
 const UX_MODULE = [
   CardModule,
@@ -63,7 +63,7 @@ const UX_MODULE = [
 
 
 @NgModule({
-  declarations: [AppComponent, NxWelcomeComponent, DashboardComponent, ShellComponent, SidebarComponent, CategoriesListComponent, CategoriesFormComponent, ProductsListComponent, ProductsFormComponent, UsersFormComponent, UsersListComponent, OrdersListComponent, OrdersDetailComponent],
+  declarations: [AppComponent, DashboardComponent, ShellComponent, SidebarComponent, CategoriesListComponent, CategoriesFormComponent, ProductsListComponent, ProductsFormComponent, UsersFormComponent, UsersListComponent, OrdersListComponent, OrdersDetailComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -74,6 +74,7 @@ const UX_MODULE = [
     ReactiveFormsModule,
     UsersModule,
     AppRoutingModule,
+    NgxStripeModule.forRoot('pk_test_51NBRh5GGei1JfP4vwqLL6bQDMYZZHn9jYu3e30NfqyponaDj7Cp0x2AlfsXKOndKUnjOZcfoP6sriZFeRWPxh2JJ0077NJDf1x'),
     ...UX_MODULE
   ],
   providers: [CategoriesService, MessageService, ConfirmationService,

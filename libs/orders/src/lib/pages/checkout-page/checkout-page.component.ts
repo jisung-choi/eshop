@@ -92,7 +92,7 @@ export class CheckoutPageComponent implements OnInit, OnDestroy {
     if (this.checkoutFormGroup.invalid) {
       return;
     }
-
+ 
     const order: Order = {
     orderItems: this.orderItems,
     shippingAddress1: this.checkoutForm.street.value,
@@ -104,15 +104,14 @@ export class CheckoutPageComponent implements OnInit, OnDestroy {
     status: 0,
     user: this.userId,
     dateOrdered: `${Date.now()}`
-    }
+    };
 
-    this.ordersService.createOrder(order).subscribe(() => {
-      //redirect to thank you page // payment page
-      this.cartService.emptyCart();
-      this.router.navigate(['/success']);
-    }, () =>
-    {
-      //display error message here
+    this.ordersService.cacheOrderData(order);
+
+    this.ordersService.createCheckoutSession(this.orderItems).subscribe(error => {
+      if(error) {
+        console.log('error in redirect to payment');
+      }
     })
   }
 

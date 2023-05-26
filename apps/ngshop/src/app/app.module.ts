@@ -4,7 +4,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { RouterModule, Routes } from "@angular/router";
 import { AppComponent } from "./app.component";
-import { NxWelcomeComponent } from "./nx-welcome.component";
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { HeaderComponent } from './shared/header/header.component';
 import { FooterComponent } from './shared/footer/footer.component';
@@ -19,13 +18,15 @@ import { MessageService } from "primeng/api";
 import { StoreModule } from "@ngrx/store";
 import { EffectsModule } from "@ngrx/effects";
 import { JwtInterceptor } from "@eshop/users";
+import { NgxStripeModule } from 'ngx-stripe';
+
 
 const routes: Routes = [
   {path: '', component: HomePageComponent},
 ]
 
 @NgModule({
-  declarations: [AppComponent, NxWelcomeComponent, HomePageComponent, HeaderComponent, FooterComponent, NavComponent, MessagesComponent],
+  declarations: [AppComponent, HomePageComponent, HeaderComponent, FooterComponent, NavComponent, MessagesComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -37,7 +38,8 @@ const routes: Routes = [
     ProductsModule,
     UiModule,
     OrdersModule,
-    ToastModule
+    ToastModule,
+    NgxStripeModule.forRoot('pk_test_51NBRh5GGei1JfP4vwqLL6bQDMYZZHn9jYu3e30NfqyponaDj7Cp0x2AlfsXKOndKUnjOZcfoP6sriZFeRWPxh2JJ0077NJDf1x'),
   ],
   providers: [MessageService,  { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true}],
   bootstrap: [AppComponent],
