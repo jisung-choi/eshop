@@ -18,7 +18,7 @@ export class UsersEffects {
       if(this.localStorageService.isValidToken()){
         const userId = this.localStorageService.getUserIdFromToken();
         if(userId) {
-          return this.usersService.getUser(userId).pipe(
+          return this.usersService.getUserInfo(userId).pipe(
             map((user) => {
               return UsersActions.buildUserSessionsSuccess({user: user});
             }),

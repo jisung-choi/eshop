@@ -24,7 +24,7 @@ const routes: Routes = [
   },
   {
     path: 'checkout',
-    canActivate: [() => inject(AuthGuardService).canActivate()],
+    canActivate: [() => inject(AuthGuardService).customerCanActivate()],
     component: CheckoutPageComponent
   },
   {

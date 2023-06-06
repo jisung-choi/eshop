@@ -25,6 +25,10 @@ export class UsersService {
   getUser(userId: string): Observable<User> {
     return this.http.get<User>(`${this.apiURLUsers}/${userId}`);
   }
+  //non-admin can call this api with its own userId
+  getUserInfo(userId: string): Observable<User> {
+    return this.http.get<User>(`${this.apiURLUsers}/info/${userId}`);
+  }
 
   createUser(user: User): Observable<User> {
     return this.http.post<User>(this.apiURLUsers, user);
