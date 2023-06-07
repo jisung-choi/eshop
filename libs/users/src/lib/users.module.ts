@@ -12,11 +12,21 @@ import { EffectsModule } from '@ngrx/effects';
 import * as fromUsers from './state/users.reducer';
 import { UsersEffects } from './state/users.effects';
 import { UsersFacade } from './state/users.facade';
+import { RegisterComponent } from './pages/register/register.component';
+import { DropdownModule } from 'primeng/dropdown';
+import { ToastModule } from 'primeng/toast';
+import { FieldsetModule } from 'primeng/fieldset';
+import { InputMaskModule } from 'primeng/inputmask';
+
 
 const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent,
+  },
+  {
+    path: 'register',
+    component: RegisterComponent,
   },
 ];
 
@@ -33,8 +43,12 @@ const routes: Routes = [
     ReactiveFormsModule,
     StoreModule.forFeature(fromUsers.USERS_FEATURE_KEY, fromUsers.reducer),
     EffectsModule.forFeature([UsersEffects]),
+    ToastModule,
+    DropdownModule,
+    FieldsetModule,
+    InputMaskModule,
   ],
-  declarations: [LoginComponent],
+  declarations: [LoginComponent, RegisterComponent],
   providers: [UsersFacade],
 })
 export class UsersModule {}

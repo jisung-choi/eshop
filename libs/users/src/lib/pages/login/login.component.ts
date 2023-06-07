@@ -66,6 +66,10 @@ export class LoginComponent implements OnInit, OnDestroy{
     })
   }
 
+  toRegisterPage() {
+    this.router.navigate(['/register']);
+  }
+
   get loginForm() {
     return this.loginFormGroup.controls;
   }

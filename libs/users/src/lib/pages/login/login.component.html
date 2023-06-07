@@ -32,7 +32,8 @@
                                 Password is required
                             </small>
                         </div>
-                        <div class="col-12">
+                        <div class="col-12 flex justify-content-end">
+                            <p-button label="Register" styleClass="p-button-link mr-2" (onClick)="toRegisterPage()"></p-button>
                             <p-button label="Login" styleClass="full-btn" (onClick)="onSubmit()"></p-button>
                         </div>
                         <div class="col-12" *ngIf="isSubmitted && authError">

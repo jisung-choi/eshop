@@ -2,19 +2,20 @@ import { Location } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { UsersService, User } from '@eshop/users';
 import { MessageService } from 'primeng/api';
 import { Subject, takeUntil } from 'rxjs';
+import { User } from '../../models/user';
+import { UsersService } from '../../services/users.service';
 
 @Component({
-  selector: 'admin-users-form',
-  templateUrl: './users-form.component.html',
-  styles: []
+  selector: 'users-register',
+  templateUrl: './register.component.html',
+  styles: [
+  ]
 })
-export class UsersFormComponent implements OnInit, OnDestroy {
+export class RegisterComponent implements OnInit, OnDestroy {
   form: FormGroup;
   isSubmitted = false;
-  editMode = false;
   currentUserId: string;
   countries = [];
 
@@ -31,7 +32,6 @@ export class UsersFormComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this._initUserForm();
     this._getCountries();
-    this._checkEditMode();
   }
 
   ngOnDestroy(): void {
@@ -58,41 +58,11 @@ export class UsersFormComponent implements OnInit, OnDestroy {
   }
 
   private _addUser(user: User){
-    this.usersService.createUser(user).pipe(takeUntil(this.endSubs$)).subscribe({
+    this.usersService.userCreateUser(user).pipe(takeUntil(this.endSubs$)).subscribe({
       next: () => this.messageService.add({ severity: 'success', summary: 'Success', detail: `User ${user.name} is created` }),
       error: () => this.messageService.add({ severity: 'error', summary: 'Error', detail: 'User could not be created' }),
       complete: () => setTimeout(() => this.goBack(), 2000)
   })}
-
-  private _updateUser(user: User){
-    this.usersService.updateUser(user).pipe(takeUntil(this.endSubs$)).subscribe({
-      next: () => this.messageService.add({ severity: 'success', summary: 'Success', detail: `User ${user.name} is updated` }),
-      error: () => this.messageService.add({ severity: 'error', summary: 'Error', detail: 'User could not be updated' }),
-      complete: () => setTimeout(() => this.goBack(), 2000)
-  })}
-
-  private _checkEditMode() {
-    this.route.params.pipe(takeUntil(this.endSubs$)).subscribe((params) => {
-      if (params.id) {
-        this.editMode = true;
-        this.currentUserId = params.id;
-        this.usersService.getUser(params.id).subscribe((user) => {
-          this.userForm.name.setValue(user.name);
-          this.userForm.email.setValue(user.email);
-          this.userForm.phone.setValue(user.phone);
-          this.userForm.isAdmin.setValue(user.isAdmin);
-          this.userForm.street.setValue(user.street);
-          this.userForm.apartment.setValue(user.apartment);
-          this.userForm.zip.setValue(user.zip);
-          this.userForm.city.setValue(user.city);
-          this.userForm.country.setValue(user.country);
-
-          this.userForm.password.setValidators([]);
-          this.userForm.password.updateValueAndValidity();
-        });
-      }
-    });
-  }
 
   onSubmit() {
     this.isSubmitted = true;
@@ -111,12 +81,8 @@ export class UsersFormComponent implements OnInit, OnDestroy {
       zip: this.userForm.zip.value,
       city: this.userForm.city.value,
       country: this.userForm.country.value
-    };
-    if (this.editMode) {
-      this._updateUser(user);
-    } else {
-      this._addUser(user);
-    }
+    };  
+    this._addUser(user);
   }
 
   goBack() {
