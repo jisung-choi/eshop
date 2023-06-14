@@ -16,6 +16,15 @@ import { InputMaskModule } from 'primeng/inputmask';
 import { InputTextModule } from 'primeng/inputtext';
 import { ThankYouComponent } from './pages/thank-you/thank-you.component';
 import { AuthGuardService, UsersModule } from '@eshop/users';
+import { TrackOrderComponent } from './pages/track-order/track-order.component';
+import { UserIconComponent } from './components/user-icon/user-icon.component';
+import { ToastModule } from 'primeng/toast';
+import { CardModule} from 'primeng/card';
+import { TableModule } from 'primeng/table';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ConfirmationService, MessageService } from 'primeng/api';
+import { TagModule } from 'primeng/tag';
+import { OrderDetailComponent } from './pages/order-detail/order-detail.component';
 
 const routes: Routes = [
   {
@@ -30,6 +39,14 @@ const routes: Routes = [
   {
     path: 'success',
     component: ThankYouComponent
+  },
+  {
+    path: 'orders/:id',
+    component: TrackOrderComponent
+  },
+  {
+    path: 'orders/orderDetail/:id',
+    component: OrderDetailComponent
   }
 ]
 
@@ -44,7 +61,12 @@ const routes: Routes = [
     FormsModule, 
     DropdownModule, 
     ReactiveFormsModule,
-    UsersModule
+    UsersModule,
+    ToastModule,
+    CardModule,
+    TableModule,
+    ConfirmDialogModule,
+    TagModule
   ],
   declarations: [
     CartIconComponent,
@@ -52,13 +74,21 @@ const routes: Routes = [
     OrderSummaryComponent,
     CheckoutPageComponent,
     ThankYouComponent,
+    TrackOrderComponent,
+    UserIconComponent,
+    OrderDetailComponent,
   ],
   exports: [
     CartIconComponent,
     CartPageComponent,
     OrderSummaryComponent,
     CheckoutPageComponent,
-    ThankYouComponent
+    ThankYouComponent,
+    TrackOrderComponent,
+    UserIconComponent,
+    OrderDetailComponent
+  ],
+  providers: [MessageService, ConfirmationService,
   ],
 })
 export class OrdersModule {

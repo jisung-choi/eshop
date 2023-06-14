@@ -17,7 +17,7 @@ import { ToastModule } from "primeng/toast";
 import { MessageService } from "primeng/api";
 import { StoreModule } from "@ngrx/store";
 import { EffectsModule } from "@ngrx/effects";
-import { JwtInterceptor } from "@eshop/users";
+import { JwtInterceptor, UsersModule } from "@eshop/users";
 import { NgxStripeModule } from 'ngx-stripe';
 
 
@@ -39,6 +39,7 @@ const routes: Routes = [
     UiModule,
     OrdersModule,
     ToastModule,
+    UsersModule,
     NgxStripeModule.forRoot('pk_test_51NBRh5GGei1JfP4vwqLL6bQDMYZZHn9jYu3e30NfqyponaDj7Cp0x2AlfsXKOndKUnjOZcfoP6sriZFeRWPxh2JJ0077NJDf1x'),
   ],
   providers: [MessageService,  { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true}],

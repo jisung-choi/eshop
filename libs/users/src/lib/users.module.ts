@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { inject, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './pages/login/login.component';
@@ -50,5 +50,7 @@ const routes: Routes = [
   ],
   declarations: [LoginComponent, RegisterComponent],
   providers: [UsersFacade],
+  exports: [
+  ],
 })
 export class UsersModule {}

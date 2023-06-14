@@ -1,0 +1,41 @@
+<p-toast></p-toast>
+<div class="grid">
+    <div class="col-11"></div>
+    <p-button label="Log Out" styleClass="p-button-danger min-width: 300px mb-2" (onClick)="logOut()"></p-button>
+</div>
+    <p-card header="Orders" subheader="List of all orders">
+        <p class="m-0">
+         <div class="p-grid">
+            <div class="p-col-12">
+                <p-table [value]="orderItem" styleClass="p-datatable-gridlines" [tableStyle]="{ 'min-width': '50rem' }">
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th pSortableColumn="dateOrdered" style="width:20%">Date Ordered <p-sortIcon field="dateOrdered"></p-sortIcon></th>
+                            <th pSortableColumn="totalPrice" style="width:20%">Total Price <p-sortIcon field="totalPrice"></p-sortIcon></th>
+                            <th pSortableColumn="status" style="width:20%">Status <p-sortIcon field="status"></p-sortIcon></th>
+                            <th> View Order Detail</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-order>
+                        <tr>
+                            <td>{{ order.dateOrdered | date: 'short'}}</td>
+                            <td>$ {{ order.totalPrice }}</td>
+                            <td>
+                                <p-tag 
+                                [value]="orderStatus[order.status].label" 
+                                [severity]="orderStatus[order.status].color">
+                                </p-tag>
+                            </td>
+                            <td><p-button
+                                (click)="viewOrder(order.id)"
+                                styleClass="p-button-success mr-2"
+                                icon="pi pi-eye"
+                               ></p-button>
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+         </div>
+    </p-card>
+<p-confirmDialog [style]="{width: '50vw'}"></p-confirmDialog>
