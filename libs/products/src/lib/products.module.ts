@@ -26,6 +26,10 @@ const routes: Routes = [
   {
     path: 'products/:productid',
     component: ProductPageComponent
+  },
+  {
+    path: 'products/search/:searchWord',
+    component: ProductsListComponent
   }
 ]
 

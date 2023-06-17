@@ -13,6 +13,11 @@
             </div>
         </div>
         <div class="col-9">
+            <div class="class" *ngIf="!this.productFound">
+                <p>
+                    Searched Product: '{{this.searchWord}}' Not Found
+                </p>    
+            </div>
             <div class="grid" *ngIf="products">
                 <div ngClass="col-4" *ngFor="let product of products">
                         <products-product-item [product] = "product"></products-product-item>
