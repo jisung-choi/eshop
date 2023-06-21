@@ -57,7 +57,8 @@ export class ProductsListComponent implements OnInit{
 
   async quickSelection(searchWord: string, searchedProducts: Product[], k: number){
     //Filter only the products with the given string in its name
-    const includedProducts: Product[] = searchedProducts.filter((product) => product.name.includes(searchWord));
+    searchWord = searchWord.toLowerCase();
+    const includedProducts: Product[] = searchedProducts.filter((product) => product.name.toLowerCase().includes(searchWord));
     try {
       await this.waitUntil(() => {
         return includedProducts.length > 0;
