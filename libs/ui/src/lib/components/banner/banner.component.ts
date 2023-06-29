@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
@@ -8,5 +9,9 @@ import { Component } from '@angular/core';
   ]
 })
 export class BannerComponent {
+  constructor(private router: Router){return}
 
+  onClickSeeMore(){
+    this.router.navigateByUrl(`/products`);
+  }
 }
