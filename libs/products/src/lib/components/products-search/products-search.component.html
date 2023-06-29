@@ -6,6 +6,14 @@
         class="products-search-input"
         name="search"
         id="search"
-        (keypress)="onEnter($event)"
+        (blur)="onSearchInputBlur()"
+        (keypress)="onSearch($event)"
     />
+    <div class="drop-down">
+        <tr *ngFor="let rec of autoComplete">
+            <button class="drop-down-buttons" (click)="onClickAutoComplete(rec)">
+                {{rec}}
+            </button>
+        </tr>
+    </div>
 </div>

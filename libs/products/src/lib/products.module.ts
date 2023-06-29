@@ -13,6 +13,7 @@ import { ProductPageComponent } from './pages/product-page/product-page.componen
 import { RatingModule } from 'primeng/rating';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { UiModule } from '@eshop/ui';
+import { DropdownModule } from 'primeng/dropdown';
 
 const routes: Routes = [
   {
@@ -34,7 +35,7 @@ const routes: Routes = [
 ]
 
 @NgModule({
-  imports: [CommonModule, RouterModule.forChild(routes), ButtonModule, CheckboxModule, FormsModule, RatingModule, InputNumberModule, UiModule],
+  imports: [CommonModule, DropdownModule, RouterModule.forChild(routes), ButtonModule, CheckboxModule, FormsModule, RatingModule, InputNumberModule, UiModule],
   declarations: [
     ProductsSearchComponent,
     CategoriesBannerComponent,
