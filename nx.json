@@ -3,7 +3,7 @@
   "npmScope": "eshop",
   "tasksRunnerOptions": {
     "default": {
-      "runner": "@nrwl/nx-cloud",
+      "runner": "nx/tasks-runners/default",
       "options": {
         "cacheableOperations": ["build", "lint", "test", "e2e"],
         "accessToken": "MjlhMzkxZTAtZmE4ZS00YWQxLTk5YjItMDc1ZGEwN2Q3NTkzfHJlYWQtd3JpdGU="

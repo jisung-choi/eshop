@@ -8,6 +8,6 @@ export class CartItem {
 }
 
 export class CartItemDetailed{
-    product? : any;
+    product? : unknown;
     quantity?: number;
 }

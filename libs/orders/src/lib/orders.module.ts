@@ -1,7 +1,6 @@
 import { inject, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
-import { CartService } from './services/cart.service';
 import { CartIconComponent } from './components/cart-icon/cart-icon.component';
 import { BadgeModule } from 'primeng/badge';
 import { CartPageComponent } from './pages/cart-page/cart-page.component';
@@ -15,7 +14,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { InputMaskModule } from 'primeng/inputmask';
 import { InputTextModule } from 'primeng/inputtext';
 import { ThankYouComponent } from './pages/thank-you/thank-you.component';
-import { AuthGuardService, UsersModule } from '@eshop/users';
 import { TrackOrderComponent } from './pages/track-order/track-order.component';
 import { UserIconComponent } from './components/user-icon/user-icon.component';
 import { ToastModule } from 'primeng/toast';
@@ -25,6 +23,9 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { TagModule } from 'primeng/tag';
 import { OrderDetailComponent } from './pages/order-detail/order-detail.component';
+
+import { CartService } from './services/cart.service';
+import { AuthGuardService, UsersModule } from '@eshop/users';
 
 const routes: Routes = [
   {

@@ -1,5 +1,4 @@
-import { OrderItem } from "@eshop/orders";
-import { User } from "@eshop/users";
+import { OrderItem } from "./order-item";
 
 export class Order {
     id?: string;

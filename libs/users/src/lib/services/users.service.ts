@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map, Observable } from 'rxjs';
 import { User } from '../models/user';
-import { environment } from '@env/environment';
+import { environment } from '../../environment';
 import * as countriesLib from "i18n-iso-countries";
 import { UsersFacade } from '../state/users.facade';
 

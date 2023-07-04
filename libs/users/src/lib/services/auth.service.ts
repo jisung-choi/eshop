@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { environment } from '@env/environment';
+import { environment } from '../../environment';
 import { Observable } from 'rxjs';
 import { User } from '../models/user';
 import { LocalStorageService } from './localstorage.service';
