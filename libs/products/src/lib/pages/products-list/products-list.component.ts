@@ -19,7 +19,11 @@ export class ProductsListComponent implements OnInit{
   productFound = true;
   searchWord = ''
 
-  constructor(private productsService: ProductsService, private categoriesService: CategoriesService, private route: ActivatedRoute){}
+  constructor(
+    private productsService: ProductsService, 
+    private categoriesService: CategoriesService, 
+    private route: ActivatedRoute,
+    ){}
 
   ngOnInit(): void {
     this._getCategories();
@@ -61,7 +65,10 @@ export class ProductsListComponent implements OnInit{
     const includedProducts: Product[] = searchedProducts.filter((product) => product.name.toLowerCase().includes(searchWord));
     try {
       await this.waitUntil(() => {
-        return includedProducts.length > 0;
+        if(includedProducts.length > 0){
+          this.productFound = true;
+          return true;
+        }
       }, 5);  
       }catch (error){
         this._getProducts();        
