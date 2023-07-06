@@ -9,8 +9,8 @@
 
 ## Overview
 
-This portofolio project was developed using MEAN stack. Some of its core functionalities are listed below.
-Use the following account to fully test out functionalities: (ID:user0@email.com, PW:123456)
+This portofolio project was developed using MEAN stack. Some of its core functionalities are listed below.  
+Use the following account to fully test out functionalities: (ID: user0@email.com, PW: 123456)
 
 - Search products on search bar
 - Auto-complete recommendations on search bar
