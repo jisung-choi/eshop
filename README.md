@@ -6,7 +6,7 @@
 
 - [Overview](#overview)
 - [Built With](#built-with)
-- [Highlights](#Highlights)
+- [Algorithm Highlights](#Algorithm-Highlights)
 
 ## Overview
 
@@ -27,20 +27,21 @@ Use the following account to fully test out functionalities: (ID: user0@email.co
 - JWT (JSON Web Tokens)
 - PrimeNG(front-end library)
 
-### Highlights
+### Algorithm Highlights
 
 **Auto-complete recommendations using suffix-tree.**
 
-image
+![Search](Search.png)
 
 Code: [Suffix-tree at line 128](libs/products/src/lib/components/products-search/products-search.component.ts)  
 
-List of product names are stored in suffix-tree and shows search recommendations according to user's input.
-
-
+List of product names are stored in suffix-tree and shows search recommendations according to user's input.  
+  
+  
+  
 **Search result based on price using quick-selection algorithm and median of medians**
 
-image
+![Search Result](https://github.com/jisung-choi/eshop/blob/main/Search%20Result.png)
 
 
 Code: [Quick Selection at line 90](libs/products/src/lib/pages/products-list/products-list.component.ts)  
