@@ -28,3 +28,19 @@ Use the following account to fully test out functionalities: (ID: user0@email.co
 - PrimeNG(front-end library)
 
 ### Highlights
+
+**Auto-complete recommendations using suffix-tree.
+**
+
+image
+
+List of product names are stored in suffix-tree and shows search recommendations according to user's input.
+
+
+**Search result based on price using quick-selection algorithm that utilizes median of medians to avoid worst case scenario.
+**
+
+image
+
+Top 10 search results(if there is enough products) are displayed according to the price.  
+This project does not have any user data so it is not desgined to display according to relevancy or ratings.
