@@ -6,6 +6,7 @@
 
 - [Overview](#overview)
 - [Built With](#built-with)
+- [Highlights](#Highlights)
 
 ## Overview
 
@@ -26,3 +27,4 @@ Use the following account to fully test out functionalities: (ID: user0@email.co
 - JWT (JSON Web Tokens)
 - PrimeNG(front-end library)
 
+### Highlights
