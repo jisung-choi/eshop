@@ -121,19 +121,19 @@ export class ProductsListComponent implements OnInit{
 
   //prevents worst case scenario by finding approx median pivot point
   findMedianOfMedians(products: Product[]): Product {
-    if (products.length <= 5) {
-      return products.sort()[Math.floor(products.length / 2)];
-    }
+  if (products.length <= 5) {
+    return products.sort((a, b) => parseFloat(a.price) - parseFloat(b.price))[Math.floor(products.length / 2)];
+  }
 
-    const sublists: Product[][] = [];
-      for (let i = 0; i < products.length; i += 5) {
-        sublists.push(products.slice(i, i + 5));
-     }
+  const sectionLength = Math.ceil(products.length / 5);
+  const medians: Product[] = [];
 
-    const medians: Product[] = [];
-     for (const sublist of sublists) {
-        medians.push(this.findMedian(sublist));
-    }
+  for (let i = 0; i < sectionLength; i++) {
+    const start = i * sectionLength;
+    const end = Math.min(start + sectionLength, products.length);
+    const section = products.slice(start, end);
+    medians.push(this.findMedian(section));
+  }
 
   return this.findMedianOfMedians(medians);
 }
