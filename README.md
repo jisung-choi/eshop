@@ -29,18 +29,19 @@ Use the following account to fully test out functionalities: (ID: user0@email.co
 
 ### Highlights
 
-**Auto-complete recommendations using suffix-tree.
-**
+**Auto-complete recommendations using suffix-tree.**
 
 image
+
+Code: [Suffix-tree at line 128](libs/products/src/lib/components/products-search/products-search.component.ts)
 
 List of product names are stored in suffix-tree and shows search recommendations according to user's input.
 
 
-**Search result based on price using quick-selection algorithm that utilizes median of medians to avoid worst case scenario.
-**
+**Search result based on price using quick-selection algorithm and median of medians**
 
 image
 
 Top 10 search results(if there is enough products) are displayed according to the price.  
+The quick-selection algorithm utilizes median of medians to avoid worst case scenario.
 This project does not have any user data so it is not desgined to display according to relevancy or ratings.
